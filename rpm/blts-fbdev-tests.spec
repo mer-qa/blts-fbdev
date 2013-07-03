@@ -1,10 +1,10 @@
 Summary: BLTS FBdev test set
 Name: blts-fbdev-tests
-Version: 0.0.14
+Version: 0.0.15
 Release: 1
 License: GPLv2
 Group: Development/Testing
-URL: https://github.com/mer-packages/mcts-blts
+URL: https://github.com/mer-qa/blts-fbdev
 Source0: %{name}-%{version}.tar.gz
 BuildRequires: libbltscommon-devel
 BuildRequires: glib2-devel
