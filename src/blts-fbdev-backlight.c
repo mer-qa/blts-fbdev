@@ -249,6 +249,19 @@ ERROR:
         return -1;
 }
 
+/* Check if we have actual brightness available, if not lets
+ * use current backlight.
+ */
+static const char
+*get_backlight_device_path()
+{
+        if (access (BLTS_FBDEV_BACKLIGHT_ACTUAL, F_OK) != 0) {
+                return BLTS_FBDEV_BACKLIGHT_CURRENT;
+        }
+
+        return BLTS_FBDEV_BACKLIGHT_ACTUAL;
+}
+
 /* Public functions */
 
 /* Verify limit values based off config */
@@ -301,7 +314,7 @@ blts_fbdev_case_backlight_verify (void *test_data, int test_num)
         }
 
         actual_brightness =  blts_fbdev_poll_brightness (
-            data, BLTS_FBDEV_BACKLIGHT_ACTUAL, new_brightness);
+            data, get_backlight_device_path(), new_brightness);
 
         if (actual_brightness != new_brightness) {
                 BLTS_ERROR ("Error: Actual brightness %d isn't the same as "
@@ -320,7 +333,7 @@ blts_fbdev_case_backlight_verify (void *test_data, int test_num)
         }
 
         actual_brightness = blts_fbdev_poll_brightness (
-            data, BLTS_FBDEV_BACKLIGHT_ACTUAL, new_brightness);
+            data, get_backlight_device_path(), new_brightness);
 
         if (actual_brightness != new_brightness) {
                 BLTS_ERROR ("Error: Actual brightness %d isn't the same as "
@@ -338,7 +351,7 @@ blts_fbdev_case_backlight_verify (void *test_data, int test_num)
         blts_fbdev_set_brightness (data, new_brightness);
 
         actual_brightness = blts_fbdev_poll_brightness (
-            data, BLTS_FBDEV_BACKLIGHT_ACTUAL, new_brightness);
+            data, get_backlight_device_path(), new_brightness);
 
         if (actual_brightness == new_brightness) {
                 BLTS_ERROR ("Error: Actual brightness %d is the same as "
@@ -356,7 +369,7 @@ blts_fbdev_case_backlight_verify (void *test_data, int test_num)
         blts_fbdev_set_brightness (data, new_brightness);
 
         actual_brightness = blts_fbdev_poll_brightness (
-            data, BLTS_FBDEV_BACKLIGHT_ACTUAL, new_brightness);
+            data, get_backlight_device_path(), new_brightness);
 
         if (actual_brightness == new_brightness) {
                 BLTS_ERROR ("Error: Actual brightness %d is the same as "
@@ -421,7 +434,7 @@ blts_fbdev_case_backlight_linear (void *test_data, int test_num)
                 }
 
                 actual_brightness = blts_fbdev_poll_brightness (
-                    data, BLTS_FBDEV_BACKLIGHT_ACTUAL, i);
+                    data, get_backlight_device_path(), i);
 
                 if (actual_brightness != i) {
                         BLTS_ERROR ("Error: Actual brightness %d isn't the "
@@ -446,7 +459,7 @@ blts_fbdev_case_backlight_linear (void *test_data, int test_num)
                 }
 
                 actual_brightness = blts_fbdev_poll_brightness (
-                    data, BLTS_FBDEV_BACKLIGHT_ACTUAL, i);
+                    data, get_backlight_device_path(), i);
 
                 if (actual_brightness != i) {
                         BLTS_ERROR ("Error: Actual brightness %d isn't the "
@@ -529,7 +542,7 @@ blts_fbdev_case_backlight_logarithmic (void *test_data, int test_num)
                 }
 
                 actual = blts_fbdev_poll_brightness (
-                    data, BLTS_FBDEV_BACKLIGHT_ACTUAL, (int)light_level);
+                    data, get_backlight_device_path(), (int)light_level);
 
                 if (actual != (int)light_level) {
                         BLTS_ERROR ("Error: Actual brightness %d isn't the "
