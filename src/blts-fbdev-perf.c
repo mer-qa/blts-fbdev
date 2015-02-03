@@ -312,12 +312,7 @@ fbdev_grab_buf_clip_vis (blts_fbdev_data *data, void *buffer)
  * buffer is properly sized and formatted (proper number of right-bpp
  * pixels, row by row).
  */
-#ifdef __ARMEL__
-/* weirdness with GCC there */
-static void __attribute__((always_inline))
-#else
 static inline void
-#endif
 fbdev_blit_buf_clip_vis (blts_fbdev_data *data, void *buffer)
 {
         __u32 i;
