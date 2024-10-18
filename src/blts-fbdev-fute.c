@@ -66,7 +66,6 @@ void log_print_fb_fix_screeninfo(struct fb_fix_screeninfo *fsi)
 	       "mmio_len    = %u\n"		/* Length of Memory Mapped I/O  */
 	       "accel       = %u\n"		/* Indicate to driver which	*/
 	       /*  specific chip/card we have	*/
-	       "reserved[]  = [%u, %u, %u]\n"		/* Reserved for future compatibility */
 	       ,
 	       fsi->id,
 	       fsi->smem_start, fsi->smem_len,
@@ -74,8 +73,7 @@ void log_print_fb_fix_screeninfo(struct fb_fix_screeninfo *fsi)
 	       fsi->xpanstep, fsi->ypanstep, fsi->ywrapstep,
 	       fsi->line_length,
 	       fsi->mmio_start, fsi->mmio_len,
-	       fsi->accel,
-	       fsi->reserved[0],fsi->reserved[1],fsi->reserved[2]);
+	       fsi->accel);
 }
 
 void log_print_fb_var_screeninfo(struct fb_var_screeninfo *vsi)
