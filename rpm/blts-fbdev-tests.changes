@@ -1,4 +1,4 @@
-* Thu Mar 27 2013 Matti Kosola <matti.kosola@jollamobile.com> - 0.0.14
+* Wed Mar 27 2013 Matti Kosola <matti.kosola@jollamobile.com> - 0.0.14
 - Move helper tool to own package and use same helper from all tests
 
 * Thu Mar 14 2013 Matti Kosola <matti.kosola@jollamobile.com> - 0.0.13
